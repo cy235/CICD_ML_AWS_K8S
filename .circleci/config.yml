@@ -99,9 +99,9 @@ jobs:
       - run:
           name: docker login
           command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-      - run:
-          name: Build Docker image
-          command: sudo docker build --tag cy235/cy235-prediction:$DTAG .
+#       - run:
+#           name: Build Docker image
+#           command: sudo docker build --tag cy235/cy235-prediction:$DTAG .
 
       # Push Docker image
       - run:
