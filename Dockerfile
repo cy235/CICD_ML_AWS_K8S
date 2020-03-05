@@ -1,10 +1,10 @@
 FROM python:3.7.4-stretch
 
 ## Step 1:
-WORKDIR /udacity_app
+WORKDIR /cy235_app
 
 ## Step 2:
-COPY . /udacity_app/
+COPY . /cy235_app/
 
 ## Step 3:
 # Install packages from requirements.txt
