@@ -6,7 +6,7 @@
 # Step 1:
 # Create dockerpath
 # dockerpath=<your docker ID/path>
-dockerpath=udacity-prediction
+dockerpath=cy235-prediction
 dockertag=v1.0
 
 # Step 2:  
