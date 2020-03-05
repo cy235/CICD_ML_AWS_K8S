@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: udacity-prediction
+  name: cy235-prediction
   labels:
-    app: udacity-prediction
+    app: cy235-prediction
 spec:
   template:
     metadata:
       labels:
-        run: udacity-prediction
-        app: udacity-prediction
+        run: cy235-prediction
+        app: cy235-prediction
     spec:
       containers:
-      - name: udacity-prediction
-        image: aminueza/udacity-prediction:v0.1
+      - name: cy235-prediction
+        image: chenyi/cy235-prediction:v0.1
         imagePullPolicy: Always
         ports:
           - containerPort: 80
@@ -29,12 +29,12 @@ spec:
 kind: HorizontalPodAutoscaler
 apiVersion: autoscaling/v1
 metadata:
-  name: udacity-prediction
+  name: cy235-prediction
 spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: udacity-prediction
+    name: cy235-prediction
   minReplicas: 2
   maxReplicas: 10
   targetCPUUtilizationPercentage: 80
