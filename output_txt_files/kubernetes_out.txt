@@ -1,5 +1,5 @@
 #Exported from logs
-# kubectl logs udacity-prediction-7fd7685ddc-9thrk
+# kubectl logs cy235-prediction-7fd7685ddc-9thrk
 
 [2019-08-31 16:04:21,220] INFO in app: JSON payload:
 {'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
