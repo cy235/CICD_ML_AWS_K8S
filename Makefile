@@ -87,7 +87,7 @@ run:
 all: setup install lint docker test upload
 
 clean: 
-	@docker rm -f udacity-prediction
+	@docker rm -f cy235-prediction
 
 $(VENV):
 	@if [ "$(HAS_PYTHON3)" == "NO" ] ; then echo "Python3 was not found! Please check README.md for further instructions" 1>&2; exit 1; fi
