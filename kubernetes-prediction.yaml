@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: cy235-prediction
-        image: chenyi/cy235-prediction:v0.1
+        image: cy235/cy235-prediction:v0.1
         imagePullPolicy: Always
         ports:
           - containerPort: 80
