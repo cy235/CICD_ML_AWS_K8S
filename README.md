@@ -155,4 +155,21 @@ $ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
 
-### Deploy Dask and Jupyter to a Kubernetes Cluster
+### Deploy ML model to a Kubernetes Cluster
+The `run_kubernetes.sh` is used to deploy the ML model image/container from Docker Hub registry into the Kubernetes cluster. You should change your `dockerpath`in `run_kubernetes.sh`, for example my `dockerpath` is 
+`dockerpath=index.docker.io/cy235/cy235-prediction:v1', where `index.docker.io` is the Docker Hub registry server.
+
+Now we execute
+```
+sh run_kubernetes.sh
+```
+then open another terminal, execute 
+```
+sh run_docker.sh
+```
+and finally, open another terminal, put a request by executing
+```
+sh make_prediction.sh
+```
+you can get the prediction result.
+
