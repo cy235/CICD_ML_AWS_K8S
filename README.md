@@ -184,7 +184,7 @@ We can now get K8s to update our application with just one command line
  kubectl set image deployment/cy235-prediction  cy235-prediction=index.docker.io/cy235/cy235-prediction:v2
 ```
 
-### Clean Up Deployment and Services
+### Clean Up Deployments and Services
 ```
 $ kubectl delete deployment cy235-prediction 
 $ kubectl delete svc cy235-prediction 
