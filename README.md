@@ -176,6 +176,8 @@ sh make_prediction.sh
 ```
 you can get the prediction result.
 
+Kubernetes official documents also provides another security way to pull the image from the container registry: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-secret-in-the-cluster-that-holds-your-authorization-token.
+
 ### Use Kubernetes Rolling Updates
 Say you’ve updated this application. Do we have to go through this again to update it on the Cluster? Nope.
 I’m going to make a few changes and push a new image with a new v2 tag to `index.docker.io/cy235/cy235-prediction:v2`
