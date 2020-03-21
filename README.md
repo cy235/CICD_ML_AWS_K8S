@@ -155,9 +155,12 @@ $ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
 
-### Deploy ML model to a Kubernetes Cluster
-The `run_kubernetes.sh` is used to deploy the ML model image/container from Docker Hub registry into the Kubernetes cluster. You should change your `dockerpath`in `run_kubernetes.sh`, for example my `dockerpath` is 
-`dockerpath=index.docker.io/cy235/cy235-prediction:v1', where `index.docker.io` is the Docker Hub registry server.
+## Deploy ML model to a Kubernetes Cluster
+
+### Pull the image from the Repository and create a Container on the Cluster
+The `run_kubernetes.sh` is used to pull the ML model image/container from Docker Hub registry and deploy it into the Kubernetes cluster. You should change your `dockerpath`in `run_kubernetes.sh`, for example my `dockerpath` is 
+`dockerpath=index.docker.io/cy235/cy235-prediction:v1`
+where `index.docker.io` is the Docker Hub registry server. `cy235-prediction:v1` is the image.
 
 Now we execute
 ```
@@ -172,4 +175,6 @@ and finally, open another terminal, put a request by executing
 sh make_prediction.sh
 ```
 you can get the prediction result.
+
+### Use Kubernetes Rolling Updates
 
