@@ -187,5 +187,9 @@ We can now get K8s to update our application with just one command line
 ### Clean Up Services and Deployments
 ```
 $ kubectl delete svc cy235-prediction 
+```
+We can find that when you delete a service, another copy of service will be generated automatically, which means the number of pods keep unchanged, this is because of the Kubernetes' mechanism. You can only delete the pod by deleting the deployment as follow
+```
 $ kubectl delete deployment cy235-prediction
 ```
+Now, the pod `cy235-prediction` and its corresponding service is deleted.
