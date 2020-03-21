@@ -1,8 +1,8 @@
-# Continuously integrating and continuously delivering ML model and deploy it in a Kubernetes cluster in AWS
+# Continuously Integrating and Continuously Delivering ML Model and Deploy it in a Kubernetes Cluster in AWS
 In this project, we build a **continous integration and continous delivery (CI/CD)** pipeline for ML model, and then delpoy this ML model into a **Kubernetes cluster**. We leverage the CircleCI to continuously test and build the ML model application and deliver the successful application into **Docker Hub registry**. Then we will deploy the ML model image/container from Docker Hub into the Kubernetes cluster in AWS. Another version of building a CI/CD pipeline in AWS Virtual Private Cloud (VPC) for Machine Learning models can be referred to my repo [CICD_ML_AWS](https://github.com/cy235/CICD_ML_AWS)
 
 
-## Continuously integrating and continuously delivering ML model into Docker Hub
+## Continuously Integrating and Continuously Delivering ML Model into Docker Hub
 In this part, we employ the CircleCI for continuously building/testing and continuously delivering the ML model application into Docker Hub registry because CircleCI is free and it runs fast due to its intrinsic caching mechanism. 
 
 First, sign up your CircleCI with github account, then add your project in github to CircleCI, and enter your AWS access ID and secret access ID in `AWS permission`. In the root path of your github project, there should be a file named `config.yml` in a hidden folder named `.circleci`. whenever there is a commit in your project in github, `config.yml` is responsible for building, testing and pushing the successful built ML model into the Docker Hub. 
@@ -155,11 +155,11 @@ $ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
 
-## Deploy ML model to a Kubernetes Cluster
+## Deploy ML Model to a Kubernetes Cluster
 
-### Pull the image from the Repository and create a Container on the Cluster
+### Pull the Image from the Repository and Create a Container on the Cluster
 The `run_kubernetes.sh` is used to pull the ML model image/container from Docker Hub registry and deploy it into the Kubernetes cluster. You should change your `dockerpath`in `run_kubernetes.sh`, for example my `dockerpath` is 
-`dockerpath=index.docker.io/cy235/cy235-prediction:v1`
+dockerpath=index.docker.io/cy235/cy235-prediction:v1
 where `index.docker.io` is the Docker Hub registry server. `cy235-prediction:v1` is the image.
 
 Now we execute
@@ -177,4 +177,15 @@ sh make_prediction.sh
 you can get the prediction result.
 
 ### Use Kubernetes Rolling Updates
+Say you’ve updated this application. Do we have to go through this again to update it on the Cluster? Nope.
+I’m going to make a few changes and push a new image with a new v2 tag to index.docker.io. index.docker.io/cy235/cy235-prediction:v2
+We can now get K8s to update our application with just one command -
+```
+ kubectl set image deployment/cy235-prediction  cy235-prediction=index.docker.io/cy235/cy235-prediction:v2
+```
 
+### Clean Up Deployment and Services
+```
+$ kubectl delete deployment cy235-prediction 
+$ kubectl delete svc cy235-prediction 
+```
