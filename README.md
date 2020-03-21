@@ -159,7 +159,7 @@ The --yes argument is required to delete the cluster. Otherwise, Kubernetes will
 
 ### Pull the Image from the Repository and Create a Container on the Cluster
 The `run_kubernetes.sh` is used to pull the ML model image/container from Docker Hub registry and deploy it into the Kubernetes cluster. You should change your `dockerpath`in `run_kubernetes.sh`, for example my `dockerpath` is 
-dockerpath=index.docker.io/cy235/cy235-prediction:v1
+`index.docker.io/cy235/cy235-prediction:v1`
 where `index.docker.io` is the Docker Hub registry server. `cy235-prediction:v1` is the image.
 
 Now we execute
@@ -178,8 +178,8 @@ you can get the prediction result.
 
 ### Use Kubernetes Rolling Updates
 Say you’ve updated this application. Do we have to go through this again to update it on the Cluster? Nope.
-I’m going to make a few changes and push a new image with a new v2 tag to index.docker.io. index.docker.io/cy235/cy235-prediction:v2
-We can now get K8s to update our application with just one command -
+I’m going to make a few changes and push a new image with a new v2 tag to `index.docker.io/cy235/cy235-prediction:v2`
+We can now get K8s to update our application with just one command line
 ```
  kubectl set image deployment/cy235-prediction  cy235-prediction=index.docker.io/cy235/cy235-prediction:v2
 ```
