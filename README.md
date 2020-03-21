@@ -193,3 +193,7 @@ We can find that when you delete a service, another copy of service will be gene
 $ kubectl delete deployment cy235-prediction
 ```
 Now, the pod `cy235-prediction` and its corresponding service is deleted.
+
+## Author
+
+* **Chen Yi** - [Github](https://github.com/cy235) - [LinkedIn](https://www.linkedin.com/in/chen-yi-ab05baba/)
