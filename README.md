@@ -169,7 +169,11 @@ Now we execute
 ```
 sh run_kubernetes.sh
 ```
-then open another terminal, put a request by executing
+then open another terminal, execute
+```
+sh run_docker.sh
+```
+finally, open another terminal, and put a request by executing
 ```
 sh make_prediction.sh
 ```
@@ -185,11 +189,21 @@ We can now get K8s to update our application with just one command line
  kubectl set image deployment/cy235-prediction  cy235-prediction=index.docker.io/cy235/cy235-prediction:v2
 ```
 
-### Clean Up Services and Deployments
+### Clean Up Services Pods and Deployments
+You can find the details of service name or pod name in all namespaces by executing
 ```
-$ kubectl delete svc cy235-prediction 
+kubectl get pods -o wide --all-namespaces
 ```
-We can find that when you delete a service, another copy of service will be generated automatically, which means the number of pods keep unchanged, this is because of the Kubernetes' mechanism. You can only delete the pod by deleting the deployment as follow
+or
+```
+kubectl get svc -o wide --all-namespaces
+```
+And delete the `prediction` pod by executing
+
+```
+$ kubectl delete pod cy235-prediction-xxxxxxxx 
+```
+We can find that when you delete a pod, another copy of pod will be generated automatically, which replaces the deleted pod, this is due to the Kubernetes' mechanism. You can delete the pod by deleting the deployment as follow
 ```
 $ kubectl delete deployment cy235-prediction
 ```
