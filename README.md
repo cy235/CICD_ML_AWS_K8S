@@ -190,7 +190,7 @@ We can now get K8s to update our application with just one command line
 ```
 
 ### Clean Up Services Pods and Deployments
-You can find the details of service name or pod name in all namespaces by executing
+You can find the details of pod name or service name in all namespaces by executing
 ```
 kubectl get pods -o wide --all-namespaces
 ```
