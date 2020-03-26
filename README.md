@@ -169,11 +169,7 @@ Now we execute
 ```
 sh run_kubernetes.sh
 ```
-then open another terminal, execute
-```
-sh run_docker.sh
-```
-finally, open another terminal, and put a request by executing
+then open another terminal, and put a request by executing
 ```
 sh make_prediction.sh
 ```
