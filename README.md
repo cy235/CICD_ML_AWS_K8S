@@ -179,9 +179,9 @@ You need add the permission for you IAM user role. To ensure that those entities
 In addition, you need to add AWS magnaged service `AWSCloudFormationFullAccess`.
 
 #### Set Up the Kubernetes Cluster
-Install `kubectl`: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html \<br>
-Install `eksctl`: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html \<br>
-Install `aws-iam-authenticator`: https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html \<br>
+Install `kubectl`: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html\<br>
+Install `eksctl`: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html\<br>
+Install `aws-iam-authenticator`: https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html\<br>
 Create a yaml file for creating Kuberbetes cluster with EKS, e.g. `cluster.yaml`
 ```
 apiVersion: eksctl.io/v1alpha5
