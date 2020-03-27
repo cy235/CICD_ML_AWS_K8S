@@ -159,8 +159,44 @@ $ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
 
 ### Set Up the Kubernetes Cluster with EKS
+In this part, we will setup Kubernetes cluster with EKS.
+#### Prerequisites
+You need add the permission for you IAM user role. To ensure that those entities can still use the Amazon EKS console, create a policy with your own unique name, such as `AmazonEKSAdminPolicy`. 
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+In addition, you need to add AWS magnaged service `AWSCloudFormationFullAccess`.
 
-
+#### Deploy the Kubernetes Metrics Server
+The Kubernetes metrics server is an aggregator of resource usage data in your cluster, and it is not deployed by default in Amazon EKS clusters. The Kubernetes dashboard uses the metrics server to gather metrics for your cluster, such as CPU and memory usage over time. Choose the tab below that corresponds to your desired deployment method. Open a terminal window and navigate to a directory where you would like to download the latest `metrics-server` release. Copy and paste the commands below into your terminal window and type Enter to execute them. These commands download the latest release, extract it, and apply the version 1.8+ manifests to your cluster.
+```
+DOWNLOAD_URL=$(curl -Ls "https://api.github.com/repos/kubernetes-sigs/metrics-server/releases/latest" | jq -r .tarball_url)
+DOWNLOAD_VERSION=$(grep -o '[^/v]*$' <<< $DOWNLOAD_URL)
+curl -Ls $DOWNLOAD_URL -o metrics-server-$DOWNLOAD_VERSION.tar.gz
+mkdir metrics-server-$DOWNLOAD_VERSION
+tar -xzf metrics-server-$DOWNLOAD_VERSION.tar.gz --directory metrics-server-$DOWNLOAD_VERSION --strip-components 1
+kubectl apply -f metrics-server-$DOWNLOAD_VERSION/deploy/1.8+/
+```
+Verify that the `metrics-server` deployment is running the desired number of pods with the following command.
+```
+kubectl get deployment metrics-server -n kube-system
+```
+Output:
+```
+NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+metrics-server   1         1         1            1           56m
+```
 ## Deploy ML Model to a Kubernetes Cluster
 
 ### Pull the Image from the Repository and Create a Container on the Cluster
