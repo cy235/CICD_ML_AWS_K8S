@@ -9,10 +9,10 @@ First, sign up your CircleCI with github account, then add your project in githu
 
 In the continuous integration part, some test modules such as python source code test as well as docker image test are added, you can refer more details in `config.yml`, where all the steps in the continuous integration are executed in terms of work flow. If the build is successful, move to the next stage to deliver the ML model into the Docker Hub, otherwise, a failure notification will be sent to your email box associated with your github account. You can also refer to more details about the continuous integration in the CircleCI dashboard.
 
-## Deploy ML model into Kubernetes in AWS
-In this part, we will deploy the ML model from Docker Hub registry into kubernetes in AWS. How to set Up a Kubernetes cluster in AWS with `kops` can be referred to my repo [](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS).
 
-### Set Up a Kubernetes Cluster in AWS
+## Set Up a Kubernetes Cluster in AWS
+### Set Up the Kubernetes Cluster with Kops
+In this part, we will setup Kubernetes cluster with Kops.
 #### Prerequisites
 Before setting up the Kubernetes cluster, you’ll need an AWS account and an installation of the AWS Command Line Interface.
 
@@ -157,6 +157,9 @@ When you’re ready to tear down your Kubernetes cluster or if you messed up and
 $ kops delete cluster --name ${KOPS_CLUSTER_NAME} --yes
 ```
 The --yes argument is required to delete the cluster. Otherwise, Kubernetes will perform a dry run without deleting the cluster.
+
+### Set Up the Kubernetes Cluster with EKS
+
 
 ## Deploy ML Model to a Kubernetes Cluster
 
