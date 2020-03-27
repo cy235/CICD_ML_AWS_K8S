@@ -167,9 +167,14 @@ where `index.docker.io` is the Docker Hub registry server. `cy235-prediction:v1`
 
 Now we execute
 ```
+sh run_docker.sh
+```
+then open another terminal, and execute
+```
 sh run_kubernetes.sh
 ```
-then open another terminal, and put a request by executing
+
+finally open another terminal, and put a request by executing
 ```
 sh make_prediction.sh
 ```
