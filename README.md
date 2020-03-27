@@ -215,7 +215,7 @@ or
 eksctl delete cluster -f cluster.yaml
 ```
 #### Deploy the Kubernetes Web UI (Dashboard)
-https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
+Deploy the Kubernetes dashboard can be referred to AWS tutorial: https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
 
 ## Deploy ML Model to a Kubernetes Cluster
 
