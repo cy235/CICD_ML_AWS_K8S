@@ -178,25 +178,45 @@ You need add the permission for you IAM user role. To ensure that those entities
 ```
 In addition, you need to add AWS magnaged service `AWSCloudFormationFullAccess`.
 
-#### Deploy the Kubernetes Metrics Server
-The Kubernetes metrics server is an aggregator of resource usage data in your cluster, and it is not deployed by default in Amazon EKS clusters. The Kubernetes dashboard uses the metrics server to gather metrics for your cluster, such as CPU and memory usage over time. Choose the tab below that corresponds to your desired deployment method. Open a terminal window and navigate to a directory where you would like to download the latest `metrics-server` release. Copy and paste the commands below into your terminal window and type Enter to execute them. These commands download the latest release, extract it, and apply the version 1.8+ manifests to your cluster.
+#### Set Up the Kubernetes Cluster
+Install `kubectl`: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+Install `eksctl`: https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html
+Install `aws-iam-authenticator`: https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+Create a yaml file for creating Kuberbetes cluster with EKS, e.g. `cluster.yaml`
 ```
-DOWNLOAD_URL=$(curl -Ls "https://api.github.com/repos/kubernetes-sigs/metrics-server/releases/latest" | jq -r .tarball_url)
-DOWNLOAD_VERSION=$(grep -o '[^/v]*$' <<< $DOWNLOAD_URL)
-curl -Ls $DOWNLOAD_URL -o metrics-server-$DOWNLOAD_VERSION.tar.gz
-mkdir metrics-server-$DOWNLOAD_VERSION
-tar -xzf metrics-server-$DOWNLOAD_VERSION.tar.gz --directory metrics-server-$DOWNLOAD_VERSION --strip-components 1
-kubectl apply -f metrics-server-$DOWNLOAD_VERSION/deploy/1.8+/
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: cy235 #cluster name
+  region: us-east-1 #desired region
+
+nodeGroups:
+  - name: ng-1 #cluster node group name
+    instanceType: t2.micro #desired instance type
+    desiredCapacity: 3 #desired nodes count / capacity
+    ssh:
+      publicKeyPath: ~/.ssh/cy235.cluster.eks.pub
 ```
-Verify that the `metrics-server` deployment is running the desired number of pods with the following command.
+Here, I generate a new pair of private and public keys named `cy235.cluster.eks` and `cy235.cluster.eks.pub`, respectively, by executing
 ```
-kubectl get deployment metrics-server -n kube-system
+$ ssh-keygen -t rsa -f ~/.ssh/cy235.cluster.eks
 ```
-Output:
+which are different from the ones generated in the previous creating cluster with Kops, in order to avoid conflicts.
+
+Other EKS cluters creating examples can be referrred to: https://github.com/weaveworks/eksctl/tree/master/examples.
+
+Then, you can create or delete a Kubernetes cluster by executing
 ```
-NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-metrics-server   1         1         1            1           56m
+eksctl create cluster -f cluster.yaml
 ```
+or
+```
+eksctl delete cluster -f cluster.yaml
+```
+#### Deploy the Kubernetes Web UI (Dashboard)
+https://docs.aws.amazon.com/eks/latest/userguide/dashboard-tutorial.html
+
 ## Deploy ML Model to a Kubernetes Cluster
 
 ### Pull the Image from the Repository and Create a Container on the Cluster
