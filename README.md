@@ -115,6 +115,10 @@ When cluster is created, we can login the AWS to EC2s, Auto scaling groups and L
 
 EC2s
 ![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/EC2.jpg)
+You can login to EC2
+```
+ssh -i ~/.ssh/cluster.cy235.com  admin@ec2-3-82-158-2.compute-1.amazonaws.com
+```
 
 Auto scaling groups
 ![image](https://github.com/cy235/Deploy_Dask_Jupyter_K8S_AWS/blob/master/auto_scaling_group.jpg)
