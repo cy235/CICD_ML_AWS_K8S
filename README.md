@@ -58,7 +58,7 @@ In order solve above problem, I execute the following commands:
 ```
 $ kops create secret sshpublickey admin -i ~/.ssh/cluster.cy235.com.pub  --state s3://cy235-kops-state-store
 ```
-If you have not created the rsa key named `cluster.cy235.com` and `cluster.cy235.com.pub`, you can create them before executing above command
+If you have not created the rsa key named `cluster.cy235.com` and `cluster.cy235.com.pub`, you should create them before executing above command
 ```
 $ ssh-keygen -t rsa -f ~/.ssh/cluster.cy235.com 
 ```
